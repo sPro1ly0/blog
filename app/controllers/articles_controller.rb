@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
     end
 
     def new
+        @article = Article.new
     end
 
     def create
@@ -17,9 +18,12 @@ class ArticlesController < ApplicationController
         @article = Article.new(article_params)
 
         # saving the model in the database, returns boolean if saved or not
-        @article.save 
-        # redirect user to show action
-        redirect_to @article
+        if @article.save 
+            # redirect user to show action
+            redirect_to @article
+        else
+            render 'new'
+        end
     end
 
     # make sure it can't be called outside its intended context
