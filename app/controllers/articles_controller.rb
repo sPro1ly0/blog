@@ -19,7 +19,6 @@ class ArticlesController < ApplicationController
 
     def create
         # initialize model with its attributes, params[:article]
-        
         @article = Article.new(article_params)
 
         # saving the model in the database, returns boolean if saved or not
@@ -40,6 +39,13 @@ class ArticlesController < ApplicationController
         else
             render 'edit'
         end
+    end
+
+    def destroy
+        @article = Article.find(params[:id])
+        @article.destroy
+
+        redirect_to articles_path
     end
     # make sure it can't be called outside its intended context
     # can be used by create and update
