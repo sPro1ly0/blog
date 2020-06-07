@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'welcome/index' # maps requests to http://localhost:3000/welcome/index to the welcome controller's index action
 
   # resources methods used to declare a REST resource
-  resources :articles
+  # nesting comments within articles
+  resources :articles do
+    resources :comments
+  end
 
   # 'controller#action'
   root 'welcome#index' # map requests to root of app to the welcome controller's index action
