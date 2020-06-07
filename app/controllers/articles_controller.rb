@@ -9,7 +9,12 @@ class ArticlesController < ApplicationController
     end
 
     def new
+        # without Article.new, @article would be nil in the view
         @article = Article.new
+    end
+
+    def edit
+        @article = Article.find(params[:id])
     end
 
     def create
@@ -22,10 +27,20 @@ class ArticlesController < ApplicationController
             # redirect user to show action
             redirect_to @article
         else
+            # The render method is used so that the @article object is passed back to the new template when it is rendered.
             render 'new'
         end
     end
 
+    def update
+        @article = Article.find(params[:id])
+
+        if @article.update(article_params)
+            redirect_to @article
+        else
+            render 'edit'
+        end
+    end
     # make sure it can't be called outside its intended context
     # can be used by create and update
     # require and permit help prevent malicious use and wrong mass assignment
