@@ -1,10 +1,15 @@
 class ArticlesController < ApplicationController
+    def show
+        # instance variable hold a reference to the article object
+        @article = Article.find(params[:id])
+    end
+
     def new
     end
 
     def create
         # initialize model with its attributes, params[:article]
-        # require and permit help prevent malicious use and wrong mass assignment
+        
         @article = Article.new(article_params)
 
         # saving the model in the database, returns boolean if saved or not
@@ -15,6 +20,7 @@ class ArticlesController < ApplicationController
 
     # make sure it can't be called outside its intended context
     # can be used by create and update
+    # require and permit help prevent malicious use and wrong mass assignment
     private
         def article_params
             params.require(:article).permit(:title, :text)
