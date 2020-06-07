@@ -4,7 +4,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :title
       t.text :text
 
-      t.timestamps
+      t.timestamps # creates two timestamp fields to allow Rails to track article creation and update times
     end
   end
 end
